@@ -19,17 +19,16 @@ class Engine(object):
             current_scene = self.scene_map.next_scene(next_scene_name)
 
 class Death(Scene):
-    def enter(self):
-        quips = [
-                "You died. You kinda suck at this.",
-                "Your mom would be proud...if she were smarter.",
-                "Such a luser."
-                "I have a small puppy that's better at this."
-                ]
+    quips = [
+            "You died. You kinda suck at this.",
+            "Your mom would be proud...if she were smarter.",
+            "Such a luser."
+            "I have a small puppy that's better at this."
+            ]
         
-        def enter(self):
-            print Death.quips[randint(0, len(self.quips) - 1)]
-            exit(1)
+    def enter(self):
+        print Death.quips[randint(0, len(self.quips) - 1)]
+        exit(1)
 
 class CentralCorridor(Scene):
     def enter(self):
@@ -86,7 +85,7 @@ class LaserWeaponArmory(Scene):
         print "wrong 10 times then the lock closes forever and you can't"
         print "get the bomb. The code is 3 digits."
         code = "%d%d%d" % (randint(1, 9), randint(1, 9), randint(1, 9))
-        guss = raw_input("[keypad]> ")
+        guess = raw_input("[keypad]> ")
         guesses = 0
 
         while guess != code and guesses < 10:
@@ -104,6 +103,7 @@ class LaserWeaponArmory(Scene):
             print "melting sound as the mechanism is fused together."
             print "You decide to sit there, and finally the Gothons blow up the"
             print "ship from their ship and you die."
+            return 'death'
 
 class TheBridge(Scene):
     def enter(self):
@@ -185,6 +185,6 @@ class Map(object):
     def opening_scene(self):
         return self.next_scene(self.start_scene)
 
-a_map = Map('centra_corridor')
+a_map = Map('central_corridor')
 a_game = Engine(a_map)
 a_game.play()
